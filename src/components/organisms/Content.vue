@@ -1,16 +1,16 @@
 <template>
   <div :class="$style.container">
     <SideBar/>
-    <Header />
-    <div :class="$style.wrapper">
-<!--      <VideoList />-->
-    </div>
+<!--    <div :class="$style.wrapper">-->
+<!--      <Header />-->
+<!--&lt;!&ndash;      <VideoList />&ndash;&gt;-->
+<!--    </div>-->
 <!--    <Footer />-->
   </div>
 </template>
 
 <script>
-import Header from "./Header.vue";
+// import Header from "./Header.vue";
 import SideBar from "./SideBar.vue";
 // import VideoList from "./VideoList";
 //
@@ -18,7 +18,7 @@ import SideBar from "./SideBar.vue";
 
 export default {
   components: {
-    Header,
+    // Header,
     SideBar,
     // VideoList,
     // Footer,
@@ -29,6 +29,9 @@ export default {
 <style lang="scss" module>
 @import "src/assets/style.scss";
 .container {
+  display: flex;
+  width: calc(100vw - (100vw - 100%));
+  height: 100vh;
 
 }
 </style>

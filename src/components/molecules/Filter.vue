@@ -4,7 +4,7 @@
       type="radio"
       name="filter"
       :value="filterValue"
-      :checked="filterChecked"
+      :checked= "filterChecked"
       @change="changeFilter"
     />
     <span>{{ filterText }}</span>
@@ -31,5 +31,35 @@
 
 
 <style lang="scss" module>
+  @import "./src/assets/vars";
+
+  .filterOption{
+    position: relative;
+    padding: 0.5rem 2rem;
+     & input {
+       display: none;
+     }
+      & span {
+        font-weight: 300;
+        &:before {
+          content: '';
+          position: absolute;
+          width: 0.7rem;
+          height: 0.7rem;
+          left: 0.4rem;
+          color: transparent;
+          border: 0.2rem solid $sideBar_option_bg;
+        }
+      }
+    input:checked + span {
+      color: $active;
+      font-weight: 400;
+
+      &:before {
+        content: url("./src/assets/img/check.png");
+        position: absolute;
+      }
+    }
+  }
 
 </style>
