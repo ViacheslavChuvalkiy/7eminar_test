@@ -7,6 +7,12 @@
   align-content: center;
 }
 
+@mixin flexRowCenter(){
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 @mixin headText(){
   font-family: $ff-main;
   font-weight: 700;

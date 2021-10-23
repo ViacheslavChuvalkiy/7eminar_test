@@ -1,14 +1,14 @@
 <template>
   <li :class="$style.themeOption"
-      value="themeValue"
+      :value="themeValue"
       @click="clickLink">
-      {{themeInfo}}
+    {{themeInfo}}
   </li>
 
 </template>
 
 <script>
-  import { mapMutations, mapGetters } from "vuex";
+  import {mapMutations, mapGetters} from "vuex";
 
   export default {
     props: {
@@ -17,8 +17,12 @@
     },
     computed: {
       ...mapGetters(["getThemeCount"]),
-      themeInfo(){
-        return this.themeText + "(" + this.getThemeCount + ")";
+      themeInfo() {
+        if (this.themeValue === 'name' || this.themeValue === 'email' || this.themeValue === 'password' || this.themeValue === 'deleteUser') {
+          return this.themeText;
+        }
+        let c = this.getThemeCount(this.themeValue);
+        return this.themeText + "(" + c + ")";
       }
     },
     methods: {
@@ -30,10 +34,15 @@
   };
 </script>
 
-
 <style lang="scss" module>
 
-  .themeOption{
-
+  .themeOption {
+    padding: 0.5rem;
+    font-weight: 300;
+    line-height: 1.2rem;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 </style>

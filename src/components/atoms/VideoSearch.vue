@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { mapMutations } from "vuex";
+  import {mapMutations} from "vuex";
 
   export default {
     data: () => ({
@@ -18,18 +18,31 @@
     }),
     methods: {
       ...mapMutations(["changeSearchInput"]),
-      changeSearch(){
+      changeSearch() {
         this.changeSearchInput(this.value)
       }
     }
-
   }
 </script>
 
 <style lang="scss" module>
   @import "src/assets/style.scss";
   .videoSearch {
-
-
+    position: relative;
+    input {
+      width: 15rem;
+      margin: 0.4rem 0.2rem;
+      border: none;
+      outline: none;
+      height: 1.3rem;
+      border-radius: 5px;
+    }
+    span:before {
+      content: url("../../assets/img/loop.png");
+      position: absolute;
+      top: 0.3rem;
+      right: 1rem;
+      padding: 0.2rem 0;
+    }
   }
 </style>

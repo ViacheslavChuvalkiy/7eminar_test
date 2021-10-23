@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { v4 as uuidv4 } from "uuid";
+import {v4 as uuidv4} from "uuid";
 
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
-    videoList: [[
+    videoList: [
       {
         "id": 24,
         "covers": {
@@ -294,24 +294,27 @@ export default new Vuex.Store({
           "link": "/subscribe"
         }
       }
-    ]],
+    ],
     filters: [
       {
         text: "Акція",
         value: "sale",
         isChecked: false,
+        access: true,
         id: uuidv4(),
       },
       {
         text: "Популярні",
         value: "popular",
         isChecked: true,
+        access: true,
         id: uuidv4(),
       },
       {
         text: "Новинки",
         value: "new",
         isChecked: false,
+        access: true,
         id: uuidv4(),
       },
     ],
@@ -324,7 +327,7 @@ export default new Vuex.Store({
       },
       {
         text: "Акцизний податок",
-        value: "tax",
+        value: "excise_tax",
         isChecked: false,
         id: uuidv4(),
       },
@@ -336,13 +339,7 @@ export default new Vuex.Store({
       },
       {
         text: "Виробництво і собівартість",
-        value: "ownership",
-        isChecked: false,
-        id: uuidv4(),
-      },
-      {
-        text: "Валюта",
-        value: "сurrency",
+        value: "production",
         isChecked: false,
         id: uuidv4(),
       },
@@ -359,79 +356,189 @@ export default new Vuex.Store({
         id: uuidv4(),
       },
     ],
-    activeFilter: "share",
+    userMenu: [
+      {
+        text: "Увійти",
+        value: "myVideo",
+        access: true,
+        id: uuidv4(),
+      },
+      {
+        text: "Зареєструватись",
+        value: "myVideo",
+        access: true,
+        id: uuidv4(),
+      },
+      {
+        text: "Мої відео",
+        value: "myVideo",
+        access: false,
+        id: uuidv4(),
+      },
+      {
+        text: "Персональні дані",
+        value: "myData",
+        access: false,
+        id: uuidv4(),
+      },
+      {
+        text: "Вихід",
+        value: "exit",
+        access: false,
+        id: uuidv4(),
+      },
+    ],
+    userData: [
+      {
+        text: "Имя",
+        value: "name",
+        id: uuidv4(),
+      },
+      {
+        text: "Почта",
+        value: "email",
+        id: uuidv4(),
+      },
+      {
+        text: "Пароль",
+        value: "password",
+        id: uuidv4(),
+      },
+      {
+        text: "Удалить пользователя",
+        value: "deleteUser",
+        id: uuidv4(),
+      },
+    ],
+    activeFilter: "all",
     activeTheme: "all",
+    pageView: 'grid',
+    auth: true,
+    showUserData: false,
+    currentPage: 1,
+    videoPerPageGrid: 6,
+    videoPerPageList: 12,
   },
   getters: {
-    listVideo({ videoList, activeFilter }) {
-      switch (activeFilter) {
-        case "active":
-          videoList = videoList.filter((item) => !item.isChecked);
-          return videoList;
-        case "completed":
-          videoList = videoList.filter((item) => item.isChecked);
-          return videoList;
-        default:
-          return videoList;
+    videoList({videoList, activeFilter, currentPage, pageView, videoPerPageGrid, videoPerPageList}) {
+      if (activeFilter === "popular") {
+        videoList = videoList.filter((item) => item.options[0].popular);
+      } else if (activeFilter === "sale") {
+        videoList = videoList.filter((item) => item.options[0].sale);
+      } else if (activeFilter === "new") {
+        videoList = videoList.filter((item) => new Date(item.date).getMonth() === 6);
+      }
+      if (pageView === 'grid') {
+        return videoList.slice(currentPage === 1 ? 0 : currentPage * videoPerPageGrid, currentPage * videoPerPageGrid);
+      } else {
+        return videoList.slice(currentPage === 1 ? 0 : currentPage * videoPerPageList, currentPage * videoPerPageList);
       }
     },
-    countTask({ tasksList }) {
+    countTask({tasksList}) {
       return tasksList.length;
     },
-    getThemeCount({ videoList, activeTheme }) {
-      return videoList.filter((video) => video.theme === activeTheme).length;
-    },
-    countCompletedTask({ tasksList }) {
+    countCompletedTask({tasksList}) {
       return tasksList.filter((task) => task.isChecked).length;
     },
-    filterList({ filters }) {
+    filterList({filters}) {
       return filters;
     },
-    themesList({ themes }) {
+    themesList({themes}) {
       return themes;
     },
-    getActiveFilter({ activeFilter }) {
+    getActiveFilter({activeFilter}) {
       return activeFilter;
+    },
+    getThemeCount: (state) => (themeName = 'all') => {
+      if (themeName === 'all') {
+        return state.videoList.length;
+      }
+      return state.videoList.filter(video => video.theme === themeName).length
+    },
+    getActiveTheme({themes, activeTheme}) {
+      let activeThemeArr = themes.filter(theme => theme.value === activeTheme);
+      return activeThemeArr.length ? activeThemeArr[0].text : "Всі теми";
+    },
+    getUserMenu({userMenu, auth}) {
+      if (auth) {
+        return userMenu.filter(item => !item.access);
+      } else {
+        return userMenu.filter(item => item.access);
+      }
+    },
+    getUserData({userData}) {
+      return userData;
+    },
+    getPageView({pageView}) {
+      return pageView;
+    },
+    getCurrentPage({currentPage}) {
+      return currentPage
+    },
+    isAuth({auth}) {
+      return auth
+    },
+    showPagination({videoList, pageView, videoPerPageGrid, videoPerPageList}) {
+      return Math.trunc(pageView === 'grid' ? videoList.length / videoPerPageGrid : videoList.length / videoPerPageList) > 1;
+    },
+    getPageCount({videoList, pageView, videoPerPageGrid, videoPerPageList}) {
+      return Math.trunc(pageView === 'grid' ? videoList.length / videoPerPageGrid : videoList.length / videoPerPageList);
+    },
+    paginationList({videoList, pageView, videoPerPageGrid, videoPerPageList, currentPage}) {
+      let pages = Math.trunc(pageView === 'grid' ? videoList.length / videoPerPageGrid : videoList.length / videoPerPageList);
+      let count = 1;
+      let maxLinkPages = 6;
+      let paginationList = [];
+      while (count <= pages) {
+        paginationList.push(
+          {
+            text: String(count),
+            id: count,
+            isCurrent: currentPage === count,
+            access: true,
+          }
+        );
+        count++
+      }
+      if (pages > maxLinkPages) {
+        let start = currentPage > 3 ? currentPage - 3 : 0;
+        let newPaginationList = paginationList.slice(start, maxLinkPages);
+        newPaginationList.push({
+          text: '...',
+          id: 'next',
+          isCurrent: false,
+          access: false,
+        });
+        newPaginationList.push(paginationList[paginationList.length - 1]);
+        return newPaginationList;
+      }
+      return paginationList;
     },
   },
   mutations: {
-    addNewTask(state, task) {
-      if (task) {
-        const newTask = {
-          text: task,
-          isChecked: false,
-          id: uuidv4(),
-        };
-        state.tasksList.push(newTask);
-      }
+    changeCurrentPage(state, pageNumber) {
+      state.currentPage = state.currentPage + (pageNumber);
     },
-    deleteTask(state, id) {
-      state.tasksList = state.tasksList.filter((task) => task.id !== id);
-    },
-    changeStatusTask(state, id) {
-      state.tasksList = state.tasksList.map((task) =>
-        task.id === id ? { ...task, isChecked: !task.isChecked } : task
-      );
+    changeAuth(state, status) {
+      state.auth = status;
     },
     changeActiveFilter(state, value) {
       state.activeFilter = value;
-      state.filters = state.filters.map((filter) =>
-        filter.value === value
-          ? { ...filter, filter: true }
-          : { ...filter, filter: false }
-      );
     },
-    saveDataLocalStorage({ tasksList }) {
-      localStorage.setItem("tasksList", JSON.stringify(tasksList));
+    saveDataLocalStorage({pageView}) {
+      localStorage.setItem("pageView", JSON.stringify(pageView));
     },
     getTasksFromLocalStorage(state) {
-      if (localStorage.tasksList) {
+      if (localStorage.pageView) {
         try {
-          state.tasksList = JSON.parse(localStorage.getItem("tasksList"));
+          state.pageView = JSON.parse(localStorage.getItem("pageView"));
         } catch (e) {
-          localStorage.removeItem("tasksList");
+          localStorage.removeItem("pageView");
         }
       }
+    },
+    chosenCurrentPage(state, number) {
+      state.currentPage = number;
     },
   },
   actions: {},
