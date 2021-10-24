@@ -35,7 +35,7 @@
     padding: 5rem 0 3rem 0;
     min-height: auto;
     height: auto;
-    grid-template-columns: repeat(3, 20rem);
+    grid-template-columns: repeat(3, 3fr);
     grid-auto-rows: minmax(25rem, auto);
     grid-column-gap: 3rem;
     grid-row-gap: 2rem;

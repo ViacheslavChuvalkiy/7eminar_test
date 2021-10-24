@@ -42,6 +42,7 @@
     width: 100%;
     height: auto;
     padding: 2rem 0 0 3rem;
+    box-sizing: border-box;
     header {
       display: flex;
       justify-content: space-between;

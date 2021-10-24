@@ -11,7 +11,7 @@
       <ul @click="toogleShow">
         МІЙ КАБІНЕТ
       <transition name="list">
-          <div :class="$style.list" v-if="show">
+          <div :class="$style.listMenu" v-if="showListMenu">
             <MenuItem
               v-for="list in getUserMenu"
               :key="list.id"
@@ -22,27 +22,40 @@
        </transition>
       </ul>
     </div>
+    <div :class="$style.menuModile">
+      <ul @click="toogleShow">
+        МЕНЮ
+        <transition name="list">
+          <div :class="$style.listMenu" v-if="showListMenu">
+            <MenuItem
+              v-for="list in getUserMenu"
+              :key="list.id"
+              :listText="list.text"
+              :value="list.value"
+            />
+          </div>
+        </transition>
+      </ul>
+    </div>
   </header>
 </template>
 <script>
 
   import MenuItem from "../atoms/MenuItem";
-  import {mapGetters} from "vuex";
+  import {mapGetters,mapMutations} from "vuex";
 
   export default {
-    data: () => ({
-      show: false
-    }),
     components: {
       MenuItem,
     },
     computed: {
-      ...mapGetters(["getUserMenu"]),
+      ...mapGetters(["getUserMenu", "showListMenu"]),
     },
     methods: {
-      toogleShow(){
-        console.log('kdc')
-        this.show = !this.show;
+      ...mapMutations(["toggleListMenu"]),
+      toogleShow(e){
+        e.stopPropagation();
+        this.toggleListMenu();
       }
     }
 
@@ -53,16 +66,19 @@
   @import "./src/assets/vars";
   header {
     display: flex;
+    justify-content: space-between;
     width: 100%;
     background-color: $black;
     z-index: 999;
     .logo {
       padding: 1rem 0 0.3rem 1.5rem;
-      width: 70%;
+      flex: 1 1 auto;
     }
     .info {
       padding: 1rem 0 0.5rem 1.5rem;
-      width: 30%;
+      margin: 0 1rem 0 0 ;
+      flex: 1 1 auto;
+      text-align: right;
       a {
         line-height: 2;
         vertical-align: sub;
@@ -71,13 +87,15 @@
         color: $links-btn;
       }
     }
-    .menu {
+    .menu, .menuModile{
       padding: 1rem 0 0.5rem 1.5rem;
-      width: 20%;
+      flex: 1 0 0.5rem;
+      box-sizing: border-box;
       ul {
         width: 75%;
         text-align: center;
         margin: 0 2rem 0 0;
+        padding: 0 1.5rem;
         float: right;
         line-height: 2.2rem;
         letter-spacing: 1.5px;
@@ -100,12 +118,19 @@
         }
       }
 
-      .list {
+      .listMenu {
         width: 100%;
         position: absolute;
         top: 2.5rem;
+        right: 0;
         color: $white;
         background-color: $black;
+      }
+    }
+    .menuModile{
+      display: none;
+      ul:after{
+        display: none;
       }
     }
   }
@@ -130,4 +155,66 @@
   .list-leave-active{
     transition: all 0.5s;
   }
+
+  @media (max-width: 790px) {
+    header {
+      .logo{
+        padding: 1rem 0 0.5rem 1.5rem;
+      }
+      .info {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 790px) {
+    header {
+      .info {
+        padding: 1rem 0 0.5rem 0.5rem;
+        a{
+          padding: 0 0.5rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 450px) {
+    header {
+      .menu{
+        display: none;
+      }
+      .menuModile{
+        display: inherit;
+        ul {
+          padding: 0 1rem 0 2rem;
+          &:before {
+            content: '\2630';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 370px) {
+    header {
+      display: block;
+        .logo{
+          text-align: center;
+        }
+      .menuModile{
+        ul{
+          max-width: 40%;
+          margin: 0 auto;
+          float: none;
+          &:before {
+            left: 2rem;
+          }
+        }
+      }
+    }
+  }
+
 </style>

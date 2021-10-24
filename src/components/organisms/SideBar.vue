@@ -68,7 +68,7 @@
   @import "./src/assets/vars";
   @import "./src/assets/mixins";
   .wrapper {
-    flex: 1 0 23rem;
+    width: 30%;
     height: auto;
     padding: 2rem 1rem;
     box-sizing: border-box;

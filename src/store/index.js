@@ -177,6 +177,7 @@ export default new Vuex.Store({
     pageView: 'grid',
     auth: false,
     showUserData: false,
+    showListMenu: false,
     currentPage: 1,
     videoPerPageGrid: 6,
     videoPerPageList: 10,
@@ -265,6 +266,9 @@ export default new Vuex.Store({
     },
     isAuth({auth}) {
       return auth
+    },
+    showListMenu({showListMenu}) {
+      return showListMenu
     },
     getPageCount({ pageView, videoPerPageGrid, videoPerPageList},getters) {
       let listCount = getters.getFilteredList.length;
@@ -378,6 +382,9 @@ export default new Vuex.Store({
     },
     changeSearchInput(state, value){
       state.searchFilter = value;
+    },
+    toggleListMenu(state){
+      state.showListMenu = !state.showListMenu;
     },
   },
   actions: {

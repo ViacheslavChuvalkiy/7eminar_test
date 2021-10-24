@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.container">
+  <div :class="$style.container" @click="clickContent">
     <Header/>
     <div :class="$style.wrapper">
       <SideBar/>
@@ -14,6 +14,7 @@
   import SideBar from "./SideBar.vue";
   import VideoPage from "./VideoPage";
   import Footer from "./Footer.vue";
+  import {mapMutations} from "vuex";
 
   export default {
     components: {
@@ -22,6 +23,12 @@
       VideoPage,
       Footer,
     },
+    methods:{
+      ...mapMutations(["toggleListMenu"]),
+       clickContent(){
+        this.toggleListMenu();
+            }
+    }
   };
 </script>
 
