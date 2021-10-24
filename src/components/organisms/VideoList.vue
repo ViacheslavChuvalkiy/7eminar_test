@@ -32,7 +32,9 @@
   @import "./src/assets/vars";
   .wrapperGrid {
     display: grid;
-    padding: 5rem 0 0 0;
+    padding: 5rem 0 3rem 0;
+    min-height: auto;
+    height: auto;
     grid-template-columns: repeat(3, 20rem);
     grid-auto-rows: minmax(25rem, auto);
     grid-column-gap: 3rem;
@@ -45,6 +47,7 @@
     text-align: left;
     width: 100%;
     height: auto;
+    min-height: auto;
     padding: 3rem 0 1rem 2rem;
   }
 

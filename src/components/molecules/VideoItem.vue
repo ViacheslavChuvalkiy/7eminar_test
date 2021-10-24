@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  // import { mapMutations } from "vuex";
+
   export default {
     props: {
       id: Number,
@@ -18,12 +18,6 @@
       videoSale: Boolean,
       pageView: String,
     },
-    // methods: {
-    //   ...mapMutations(["changeActiveFilter"]),
-    //   changeFilter() {
-    //     this.changeActiveFilter(this.filterValue);
-    //   },
-    // },
   };
 </script>
 

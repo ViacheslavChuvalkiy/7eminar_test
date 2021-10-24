@@ -18,6 +18,7 @@
           :key="theme.id"
           :themeValue="theme.value"
           :themeText="theme.text"
+          :isActive = "theme.isActive"
         />
       </ul>
     </div>

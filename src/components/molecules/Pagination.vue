@@ -1,7 +1,7 @@
 <template>
-  <div :class="$style.wrapper">
+  <div :class="$style.wrapper" v-if="paginationList.length">
     <button
-      :disabled="{getCurrentPage} === 0"
+      :disabled = "getCurrentPage === 1"
       @click="prevPage">
       &lt;
     </button>
@@ -16,7 +16,7 @@
       />
     </ul>
     <button
-      :disabled="{getCurrentPage} >= {getPageCount} -1"
+      :disabled = "getCurrentPage === getPageCount"
       @click="nextPage">
       &gt;
     </button>
@@ -51,7 +51,7 @@
   @import "./src/assets/mixins";
   .wrapper {
     @include flexRowCenter();
-    padding: 2.5rem 2.5rem 0 2.5rem;
+    padding: 0.5rem 2.5rem 0 2.5rem;
     ul {
       @include flexRowCenter();
     }

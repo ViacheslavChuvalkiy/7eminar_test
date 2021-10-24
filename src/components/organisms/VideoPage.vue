@@ -8,7 +8,7 @@
       </div>
     </header>
     <VideoList/>
-    <Pagination v-if="showPagination"/>
+    <Pagination/>
   </div>
 </template>
 
@@ -28,7 +28,7 @@
       Pagination
     },
     computed: {
-      ...mapGetters(["getActiveTheme", "showPagination"]),
+      ...mapGetters(["getActiveTheme"]),
     }
   }
 </script>
@@ -38,6 +38,8 @@
   .wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
     height: auto;
     padding: 2rem 0 0 3rem;
     header {

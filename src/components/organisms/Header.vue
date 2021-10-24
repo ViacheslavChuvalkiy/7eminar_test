@@ -8,16 +8,18 @@
       <a href="tel:+380442245525">(044) 224-55-25</a>
     </div>
     <div :class="$style.menu">
-      <ul>
+      <ul @click="toogleShow">
         МІЙ КАБІНЕТ
-        <div :class="$style.list">
-          <MenuItem
-            v-for="list in getUserMenu"
-            :key="list.id"
-            :listText="list.text"
-            :value="list.value"
-          />
-        </div>
+      <transition name="list">
+          <div :class="$style.list" v-if="show">
+            <MenuItem
+              v-for="list in getUserMenu"
+              :key="list.id"
+              :listText="list.text"
+              :value="list.value"
+            />
+          </div>
+       </transition>
       </ul>
     </div>
   </header>
@@ -28,12 +30,22 @@
   import {mapGetters} from "vuex";
 
   export default {
+    data: () => ({
+      show: false
+    }),
     components: {
       MenuItem,
     },
     computed: {
       ...mapGetters(["getUserMenu"]),
+    },
+    methods: {
+      toogleShow(){
+        console.log('kdc')
+        this.show = !this.show;
+      }
     }
+
   }
 
 </script>
@@ -89,12 +101,33 @@
       }
 
       .list {
-        display: none;
         width: 100%;
         position: absolute;
+        top: 2.5rem;
         color: $white;
         background-color: $black;
       }
     }
+  }
+
+  /* list transition*/
+  .list-enter-from{
+    opacity: 0;
+  }
+  .list-enter-to{
+    opacity: 1;
+  }
+  .list-enter-active{
+      transition: all 0.5s;
+  }
+  .list-leave-from{
+    opacity: 1;
+    transform: scale(1);
+  }
+  .list-leave-to{
+    opacity: 0;
+  }
+  .list-leave-active{
+    transition: all 0.5s;
   }
 </style>

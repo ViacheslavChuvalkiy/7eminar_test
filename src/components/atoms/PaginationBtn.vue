@@ -2,7 +2,7 @@
   <li
     :class="[isCurrent ? $style.currentLink : $style.pageLink]"
     :id="id"
-    @click="[access ? listClick() : null]"
+    @click="[access ? listClick(id) : null]"
   >
     {{listText}}
   </li>
@@ -20,8 +20,10 @@
     },
     methods: {
       ...mapMutations(["chooseCurrentPage"]),
-      listClick() {
-        this.chosenCurrentPage(event.id);
+      listClick(id) {
+        if(id){
+          this.chooseCurrentPage(id);
+        }
       },
     }
   }

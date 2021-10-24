@@ -4,6 +4,7 @@
       type="text"
       v-model="value"
       @change="changeSearch"
+      maxlength="30"
     />
     <span></span>
   </div>

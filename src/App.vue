@@ -6,19 +6,21 @@
 
 <script>
   import Content from "./components/organisms/Content.vue";
-  import { mapMutations } from "vuex";
+  import { mapMutations, mapActions } from "vuex";
 
 export default {
   components: {
     Content,
-  }
-  ,methods: {
+  },
+  methods: {
     ...mapMutations(["getPageViewFromLocalStorage"]),
+    ...mapActions(['getVideoList'])
   },
   mounted() {
     if (localStorage.tasksList) {
       this.getPageViewFromLocalStorage();
     }
+    this.getVideoList();
   },
 }
 </script>
