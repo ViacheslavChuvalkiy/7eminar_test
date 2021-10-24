@@ -52,6 +52,7 @@
       padding: 1rem 0 0.5rem 1.5rem;
       width: 30%;
       a {
+        line-height: 2;
         vertical-align: sub;
         padding: 0 1rem;
         text-decoration: none;
@@ -63,24 +64,30 @@
       width: 20%;
       ul {
         width: 75%;
-        height: 100%;
         text-align: center;
-        float: right;
-        line-height: 2rem;
         margin: 0 2rem 0 0;
-        border-radius: 15px;
+        float: right;
+        line-height: 2.2rem;
+        letter-spacing: 1.5px;
         font-size: $fs-main;
         font-weight: 700;
-        background-color: $white;
+        color: $white;
+        border: 1px solid $white;
+        border-radius: 15px;
         position: relative;
         cursor: pointer;
+        &:hover{
+          color: $links-btn;
+          background-color: $white;
+        }
+        &:after{
+          content: '\003E';
+          position: absolute;
+          right: 1rem;
+          top: 0;
+        }
       }
-      ul:after {
-        content: '\003E';
-        position: absolute;
-        right: 1rem;
-        top: 0;
-      }
+
       .list {
         display: none;
         width: 100%;

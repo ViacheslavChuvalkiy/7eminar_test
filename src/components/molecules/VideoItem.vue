@@ -70,10 +70,9 @@
       }
     }
     .videoSaleBtn {
-      border: 1px solid $active;
+      border: 2px solid $active;
       background-color: $active;
       color: $white;
-      box-sizing: content-box;
       &:after {
         content: '\003E';
         position: absolute;
@@ -83,11 +82,12 @@
         right: 1rem;
       }
       &:hover {
-        border: 1px solid $hover;
+        border: 2px solid $hover;
         background-color: $hover;
       }
     }
   }
+
   .gridStyle {
     .imgBlock {
       height: 22rem;
@@ -96,7 +96,30 @@
     }
   }
   .listStyle {
+    display: inline-block;
+    position: relative;
+    padding: 2rem 0;
     .imgBlock {
+      display: inline-block;
+      width: 10rem;
+      height: 10rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    p{
+      display: inline-block;
+      margin: 0 1rem 6rem 1rem;
+      height: auto;
+      max-width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 3.5rem;
+    }
+    .videoSaleBtn, .videoShowBtn{
+      display: inline-block;
+      position: absolute;
+      left: 20rem;
+      bottom: 3rem;
     }
   }
 

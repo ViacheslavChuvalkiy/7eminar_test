@@ -417,7 +417,7 @@ export default new Vuex.Store({
     showUserData: false,
     currentPage: 1,
     videoPerPageGrid: 6,
-    videoPerPageList: 12,
+    videoPerPageList: 10,
   },
   getters: {
     videoList({videoList, activeFilter, currentPage, pageView, videoPerPageGrid, videoPerPageList}) {
@@ -525,10 +525,13 @@ export default new Vuex.Store({
     changeActiveFilter(state, value) {
       state.activeFilter = value;
     },
+    changesPageView(state, value) {
+      state.pageView = value;
+    },
     saveDataLocalStorage({pageView}) {
       localStorage.setItem("pageView", JSON.stringify(pageView));
     },
-    getTasksFromLocalStorage(state) {
+    getPageViewFromLocalStorage(state) {
       if (localStorage.pageView) {
         try {
           state.pageView = JSON.parse(localStorage.getItem("pageView"));

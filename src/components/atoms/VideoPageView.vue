@@ -1,11 +1,29 @@
 <template>
   <div :class="$style.wrapper">
-    <span :class="$style.videoGridView"></span>
-    <span :class="$style.videoListView"></span>
+    <span :class="$style.videoGridView" @click="changePageView('grid')"></span>
+    <span :class="$style.videoListView" @click="changePageView('list')"></span>
   </div>
 </template>
 
 <script>
+
+  import {mapMutations,mapGetters} from "vuex";
+
+  export default {
+    computed:{
+      ...mapGetters(["getPageView"])
+    },
+    methods: {
+      ...mapMutations(["changesPageView","saveDataLocalStorage"]),
+      changePageView(value) {
+        if(this.getPageView !== value){
+          this.changesPageView(value);
+          this.saveDataLocalStorage();
+        }
+
+      },
+    }
+  }
 </script>
 
 <style lang="scss" module>
@@ -18,7 +36,7 @@
       width: 1.5rem;
       height: 1.5rem;
       margin: 0.3rem 0.4rem;
-      background-image: url("../../assets/img/grid.png");
+      background-image: url("../../assets/img/list.png");
       background-repeat: no-repeat;
       background-size: cover;
       cursor: pointer;
@@ -28,7 +46,7 @@
       width: 1.5rem;
       height: 1.5rem;
       margin: 0.3rem 0.4rem;
-      background-image: url("../../assets/img/list.png");
+      background-image: url("../../assets/img/grid.png");
       background-repeat: no-repeat;
       background-size: cover;
       cursor: pointer;
