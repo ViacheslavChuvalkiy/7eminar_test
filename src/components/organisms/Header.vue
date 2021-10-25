@@ -94,8 +94,8 @@
       ul {
         width: 75%;
         text-align: center;
-        margin: 0 2rem 0 0;
-        padding: 0 1.5rem;
+        margin: 0 1rem 0 0;
+        padding: 0 2rem;
         float: right;
         line-height: 2.2rem;
         letter-spacing: 1.5px;
@@ -113,7 +113,7 @@
         &:after{
           content: '\003E';
           position: absolute;
-          right: 1rem;
+          right: 0.5rem;
           top: 0;
         }
       }
@@ -159,20 +159,32 @@
   @media (max-width: 790px) {
     header {
       .logo{
+        flex: none;
         padding: 1rem 0 0.5rem 1.5rem;
       }
       .info {
         display: none;
       }
+      .menu{
+        ul {
+          width: 40%;
+          &:after {
+            right: 1rem;
+          }
+        }
+      }
     }
   }
 
-  @media (max-width: 790px) {
+  @media (max-width: 650px) {
     header {
-      .info {
-        padding: 1rem 0 0.5rem 0.5rem;
-        a{
-          padding: 0 0.5rem;
+      .menu{
+        padding: 1rem 0 0.5rem 0;
+        ul {
+          width: 50%;
+          &:after {
+            display: none;
+          }
         }
       }
     }
@@ -201,6 +213,7 @@
   @media (max-width: 370px) {
     header {
       display: block;
+      min-width: 300px;
         .logo{
           text-align: center;
         }

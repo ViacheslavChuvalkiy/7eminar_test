@@ -57,6 +57,31 @@
       .menu {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .wrapper {
+      padding: 1rem 0.3rem 0 0.3rem;
+      header {
+        flex-direction: column-reverse;
+        text-align: center;
+        .menu{
+          flex-direction: column;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    .wrapper {
+      min-width: 320px;
+      header {
+        h1 {
+          padding: 0.3rem 0;
+        }
       }
     }
   }

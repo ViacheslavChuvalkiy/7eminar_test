@@ -41,9 +41,23 @@
     span:before {
       content: url("../../assets/img/loop.png");
       position: absolute;
-      top: 0.3rem;
+      top: 0.4rem;
       right: 1rem;
       padding: 0.2rem 0;
+      cursor: pointer;
     }
   }
+
+  @media (max-width: 900px) {
+    .videoSearch {
+      input {
+        width: 12rem;
+      }
+      span:before {
+        right: 1.5rem;
+      }
+    }
+  }
+
+
 </style>

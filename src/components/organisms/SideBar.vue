@@ -116,4 +116,29 @@
     }
   }
 
+  @media (max-width: 800px) {
+    .wrapper {
+      padding: 2rem 0;
+      .filterVideo, .filterTheme {
+        min-width: 3rem;
+        margin: 0 0.5rem;
+        padding: 1rem 0.2rem 1rem 1.5rem;
+      }
+      .filterVideo:after, .filterTheme:after {
+        right: 1rem;
+        top: 0.75rem;
+      }
+      .filterVideo:before, .filterTheme:before {
+        left: 0.3rem;
+      }
+
+    }
+  }
+
+  @media (max-width: 500px) {
+    .wrapper {
+      display: none;
+    }
+  }
+
 </style>

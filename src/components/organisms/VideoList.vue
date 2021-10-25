@@ -35,8 +35,8 @@
     padding: 5rem 0 3rem 0;
     min-height: auto;
     height: auto;
-    grid-template-columns: repeat(3, 3fr);
-    grid-auto-rows: minmax(25rem, auto);
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(15rem, auto);
     grid-column-gap: 3rem;
     grid-row-gap: 2rem;
     text-align: left;
@@ -51,4 +51,24 @@
     padding: 3rem 0 1rem 2rem;
   }
 
+  @media (max-width: 1000px) {
+    .wrapperGrid{
+      padding: 2rem 0 1.5rem 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .wrapperGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .wrapperList {
+      padding: 1rem 0;
+    }
+  }
+  @media (max-width: 450px) {
+    .wrapperGrid {
+      min-width: 320px;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
 </style>

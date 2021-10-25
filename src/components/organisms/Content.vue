@@ -14,7 +14,7 @@
   import SideBar from "./SideBar.vue";
   import VideoPage from "./VideoPage";
   import Footer from "./Footer.vue";
-  import {mapMutations} from "vuex";
+  import {mapGetters, mapMutations} from "vuex";
 
   export default {
     components: {
@@ -23,11 +23,17 @@
       VideoPage,
       Footer,
     },
+    computed: {
+      ...mapGetters(["showListMenu"]),
+    }
+    ,
     methods:{
       ...mapMutations(["toggleListMenu"]),
        clickContent(){
-        this.toggleListMenu();
-            }
+        if(this.showListMenu){
+          this.toggleListMenu();
+        }
+       }
     }
   };
 </script>
@@ -49,4 +55,12 @@
       z-index: 1;
     }
   }
+  @media (max-width: 800px) {
+    .container {
+      min-width: 310px;
+      .wrapper {
+        padding: 2rem 0 0 0;
+      }
+      }
+    }
 </style>
