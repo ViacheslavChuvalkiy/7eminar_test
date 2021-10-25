@@ -2,7 +2,7 @@
   <div :class="[pageView === 'grid'? $style.gridStyle : $style.listStyle]">
     <div :class="$style.imgBlock" :style="`background-image: url( ${videoImg})`">
     </div>
-    <p>{{VideoTitle}}</p>
+    <p v-html = "VideoTitle"></p>
     <button :class="$style.videoSaleBtn" v-if="videoSale">ПРИДБАТИ</button>
     <button :class="$style.videoShowBtn" v-else>ДИВИТИСЬ</button>
   </div>
