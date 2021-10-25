@@ -29,7 +29,7 @@
       height: 5rem;
       overflow: hidden;
       margin: 1rem 0 3rem 0;
-      padding: 0 1rem;
+      padding: 0 2rem;
       font-size: 1.5rem;
       line-height: 1.7rem;
       font-weight: 400;
@@ -131,7 +131,7 @@
       p{
         height: 3rem;
         line-height: 1.5rem;
-        font-size: 1rem;
+        font-size: $fs-main;
       }
 
     }

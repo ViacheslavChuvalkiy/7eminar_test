@@ -34,7 +34,7 @@
     display: grid;
     padding: 5rem 0 3rem 0;
     min-height: auto;
-    height: auto;
+    height: 100%;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(15rem, auto);
     grid-column-gap: 3rem;
@@ -46,7 +46,7 @@
     flex-direction: column;
     text-align: left;
     width: 100%;
-    height: auto;
+    height: 100%;
     min-height: auto;
     padding: 3rem 0 1rem 2rem;
   }
